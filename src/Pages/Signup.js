@@ -1,0 +1,67 @@
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
+import { useState } from "react"
+import { auth, colRef } from "../App";
+import { addDoc } from "firebase/firestore";
+import { AuthConsumer } from "../Context/ContextAuth/AuthConsumer";
+import { Link } from "react-router-dom";
+
+
+export const Signup = ()=>{
+    const {dispatch} = AuthConsumer();
+    const [email, setEmail] = useState('');
+    const [disable, setDisable] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(null);
+    const [password, setPassword] = useState('');
+    const [businessName, setBusinessName] = useState('')
+    const handleSignUp= (e)=>{
+        setDisable(true);
+        e.preventDefault();
+        createUserWithEmailAndPassword(auth, 
+            email,
+            password).then((userCredentials)=>{
+            setDisable(false)
+
+                const user = userCredentials.user;
+                localStorage.setItem('user', JSON.stringify(user));
+                dispatch({type:'signUser', payload:user});
+                sendEmailVerification(user)
+                .then(()=>{
+                    updateProfile(user, {
+                        displayName: businessName
+                    })
+                    .then(()=>{
+                        addDoc(colRef, {
+                            businessName:businessName,
+                            userId:user.uid
+                        }).then(()=>{
+                            setEmail('');
+                            setPassword('');
+                            setBusinessName('');
+                        }).catch(error=>{console.log(error)})
+
+                    }).catch(error=>console.log(error))
+                    
+
+                }).catch(error=>console.log(error))
+                
+
+        }).catch(error=>{
+        console.log(error);
+        let err = error.message.split('Firebase:')
+        setErrorMessage(err[1]);
+        setDisable(false)
+        })
+    }
+    return(
+        <div>
+            <form>
+                <input placeholder="busisness name" value={businessName} onChange={e=>setBusinessName(e.target.value)}/>
+                <input type="email" placeholder="email" value={email} onChange={e=>setEmail(e.target.value)} />
+                <input placeholder="create password" value={password} onChange={e=>setPassword(e.target.value)} />
+                <button onClick={handleSignUp} className="btn btn-outline-success" disabled={disable}>submit</button>
+                {errorMessage && <p>{errorMessage}</p>}
+            </form>
+            <p> if you already have an account  <Link to={'/signin'}>sign in</Link> </p>
+        </div>
+    )
+}
