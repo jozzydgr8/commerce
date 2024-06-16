@@ -22,8 +22,8 @@ body {
 }
 .full-btn{
   background: var(--primary);
-  padding: 1%;
-  border-radius: 4px;
+  padding: 2%;
+  border-radius: 5px;
   border: none;
   color: var(--bright);
 }
@@ -32,7 +32,8 @@ code {
     monospace;
 }
 img{
-  width: 30%;
+  width: 80%;
+  
 }
 .rootsection{
   /* background-image: url('./asset/7802103.jpg') ; */
@@ -51,4 +52,27 @@ img{
   width: fit-content;
   padding: 10px;
   min-height: 40vh;
+}
+
+
+/* display grid o fprof */
+.gridProduct{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2% 5%;
+}
+.product{
+  background: var(--bright);
+  border: solid 1px rgb(177, 177, 177);
+  border-radius: 20px;
+}
+.productDetail{
+  padding: 20px;
+}
+.productImage{
+  background:rgb(231, 231, 231) ;
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  text-align: center;
 }

@@ -26,13 +26,12 @@ export const MyProduct = ()=>{
     },[]);
 
     return(
-        <div>
-          <h1>Products you have uploaded </h1>
+          <div className="gridProduct">
             {
                 data && data.map((data)=>(
                     <MyProductArray key={data.id} data={data}/>
                 ))
             }
-        </div>
+          </div>
     )
 }

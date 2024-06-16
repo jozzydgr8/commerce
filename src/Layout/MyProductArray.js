@@ -2,10 +2,12 @@ import { deleteDoc, doc } from "firebase/firestore"
 import { colRef, storage } from "../App"
 import { useState } from "react"
 import { deleteObject, getMetadata, ref } from "firebase/storage"
+import { AuthConsumer } from "../Context/ContextAuth/AuthConsumer"
 
 export const MyProductArray = ({data})=>{
 
-    const [warn, setWarn] = useState(false)
+    const [warn, setWarn] = useState(false);
+    const {user} = AuthConsumer();
     const handleDelete = ()=>{
                 const fileStorage = ref(storage, data.imagePath);
                 const metaData = getMetadata(fileStorage)
@@ -21,16 +23,23 @@ export const MyProductArray = ({data})=>{
             
     }
     return(
-        <div>
-
+        <div className="product">
+            <div className="productImage">
              <img src={data.productImage} alt="image"/>
-             <h3>{data.product}</h3>
-             <p>company: {data.productOwner}</p>
-             <p>category: {data.category}</p>
-             <p>price: {data.prize}</p>
+            </div>
+             
+             <div className="productDetail">
+                <div>{data.product}</div>
+                <div>price: {data.prize}</div>
+                
+                <div>
+                    <button className="full-btn">Add to cart</button>
+                </div>
 
-             <button className="btn btn-danger" onClick={()=>setWarn(true)}>delete</button>
-             {warn && <div>are you sure to delete <button className="btn btn-danger" onClick={handleDelete}>yes</button> <button className="btn btn-outline-warn" onClick={()=>setWarn(false)}>no</button></div>}
+                {user && <button className="btn btn-danger" onClick={()=>setWarn(true)}>delete</button> }
+                { user && warn && <div>are you sure to delete <button className="btn btn-danger" onClick={handleDelete}>yes</button> <button className="btn btn-outline-warn" onClick={()=>setWarn(false)}>no</button></div>}
+            
+             </div>
 
         </div>
     )

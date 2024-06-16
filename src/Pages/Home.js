@@ -6,6 +6,7 @@ import{MyProduct} from '../Layout/MyProduct'
 
 export const Home = ()=>{
     const [name, setName] = useState('')
+   
     useEffect(()=>{
         onAuthStateChanged(auth, user=>{
           if(user){
@@ -21,17 +22,8 @@ export const Home = ()=>{
     return(
         <>
         <div className="container-fluid">
-           {/* <h1> <strong>Hey there</strong>, here is a resume of where {name} is at</h1> */}
 
            shop with us today
-           
-            <p>yours to do</p>
-            <div className="homefeatures">
-             <Link to='uploadproduct'>uploadproduct
-             <p>you have new product to sale!</p>
-             <p>click to upload product </p>
-             </Link>
-            </div>
             
 
             <main>
