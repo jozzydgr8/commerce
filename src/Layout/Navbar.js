@@ -42,7 +42,7 @@ export const Navbar = ()=>{
             <NavLink className="nav-link" to="#">Link</NavLink>
           </li>
           <li>
-          {user ? <button className="outline-btn" onClick={handleLogOut}>logout</button> : <button className="full-btn">sign in</button> }
+          {user ? <button className="outline-btn" onClick={handleLogOut}>logout</button> : <NavLink to='signin' className="full-btn">sign in</NavLink> }
           </li>
           <li className="nav-item dropdown">
             <NavLink className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

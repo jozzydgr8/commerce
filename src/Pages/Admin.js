@@ -2,21 +2,8 @@ import {  onAuthStateChanged } from "firebase/auth"
 import { auth } from "../App"
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import{MyProduct} from '../Layout/MyProduct'
 
-export const Admin  = ()=>{
-    const [name, setName] = useState('')
-    useEffect(()=>{
-        onAuthStateChanged(auth, user=>{
-          if(user){
-            const user = auth.currentUser;
-            const {displayName} = user;
-            localStorage.setItem('displayName', JSON.stringify(displayName));
-            setName(displayName);
-
-          }
-        })
-      },[]);
+export const Admin  = ({name})=>{
 
     return(
         <>
@@ -30,10 +17,6 @@ export const Admin  = ()=>{
              </Link>
             </div>
             
-
-            <main>
-              <MyProduct/>
-            </main>
         </div>
         </>
     )

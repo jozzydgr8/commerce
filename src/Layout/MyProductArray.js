@@ -36,8 +36,8 @@ export const MyProductArray = ({data})=>{
                     <button className="full-btn">Add to cart</button>
                 </div>
 
-                {user && <button className="btn btn-danger" onClick={()=>setWarn(true)}>delete</button> }
-                { user && warn && <div>are you sure to delete <button className="btn btn-danger" onClick={handleDelete}>yes</button> <button className="btn btn-outline-warn" onClick={()=>setWarn(false)}>no</button></div>}
+                {user && <button className="outline-btn" onClick={()=>setWarn(true)}>delete</button> }
+                { user && warn && <div> <div>are you sure to delete</div> <button className="outline-btn" onClick={handleDelete}>yes</button> <button className="full-btn" onClick={()=>setWarn(false)}>no</button></div>}
             
              </div>
 
