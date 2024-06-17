@@ -14,6 +14,17 @@ body {
   --primary:#101314;
   --bright:#FFFFFA
 }
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 2% 10%;
+}
+form input, form select {
+  padding: 3px;
+  border: solid 0.2px  rgb(177, 177, 177);
+ 
+}
 .outline-btn{
   border: var(--primary) solid 1.5px;
   background: none;
@@ -23,6 +34,7 @@ body {
   padding: 1%;
   margin: 2% 2% 0 0;
   min-width: 100px;
+  text-decoration: none;
 
 }
 .full-btn{
@@ -41,23 +53,9 @@ img{
   
 }
 .rootsection{
-  /* background-image: url('./asset/7802103.jpg') ; */
   min-height: 100vh;
 }
 
-.homefeatures{
-  display:grid;
-}
-.homefeatures a{
-  text-decoration: none;
-  background-color: #f3f5f4;
-  color: black;
-  border: solid 2px #1eae98;
-  border-radius: 10px;
-  width: fit-content;
-  padding: 10px;
-  min-height: 40vh;
-}
 
 
 /* display grid o fprof */

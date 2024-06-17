@@ -1,19 +1,13 @@
-import {  onAuthStateChanged } from "firebase/auth"
-import { auth } from "../App"
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-
 export const Admin  = ({name})=>{
 
     return(
         <>
         <div className="container-fluid">
-           <h1> <strong>Hey there</strong>, here is a resume of where {name} is at</h1>
-            <p>yours to do</p>
+           <h3>welcome {name}</h3>
             <div className="homefeatures">
-             <Link to='uploadproduct'>uploadproduct
-             <p>you have new product to sale!</p>
-             <p>click to upload product </p>
+             <Link to='uploadproduct' className="full-btn">
+             click to upload product
              </Link>
             </div>
             

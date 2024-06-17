@@ -58,10 +58,11 @@ export const Signup = ()=>{
                 <input placeholder="busisness name" value={businessName} onChange={e=>setBusinessName(e.target.value)}/>
                 <input type="email" placeholder="email" value={email} onChange={e=>setEmail(e.target.value)} />
                 <input placeholder="create password" value={password} onChange={e=>setPassword(e.target.value)} />
-                <button onClick={handleSignUp} className="btn btn-outline-success" disabled={disable}>submit</button>
+                <button onClick={handleSignUp} className="full-btn" disabled={disable}>submit</button>
                 {errorMessage && <p>{errorMessage}</p>}
+                <p> if you already have an account  <Link to={'/signin'}>sign in</Link> </p>
             </form>
-            <p> if you already have an account  <Link to={'/signin'}>sign in</Link> </p>
+            
         </div>
     )
 }

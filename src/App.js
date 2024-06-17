@@ -37,7 +37,10 @@ export const storage = getStorage(app)
 
 
 function App() {
-  const {user} = AuthConsumer();
+  const {user, loading} = AuthConsumer();
+  if(loading){
+    return <div>...loading</div>
+  }
 
   //router
   const router = createBrowserRouter(

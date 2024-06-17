@@ -8,20 +8,29 @@ export const MyProductArray = ({data})=>{
 
     const [warn, setWarn] = useState(false);
     const {user} = AuthConsumer();
-    const handleDelete = ()=>{
+    const handleDelete =  ()=>{
                 const fileStorage = ref(storage, data.imagePath);
-                const metaData = getMetadata(fileStorage)
-                .then(()=>{
+                if(fileStorage){
+                    console.log('wey')
+                    const metaData = getMetadata(fileStorage).then(()=>{
+                        deleteObject(fileStorage);
+                    }).catch(error=>{
+                        if(error){
+                            const docRef = doc(colRef, data.id);
+                            deleteDoc(docRef);
+                        }
+                        console.log(error);
+                        return
+                    })
+                const docRef = doc(colRef, data.id);
+                deleteDoc(docRef);
+                    }
                     const docRef = doc(colRef, data.id);
                     deleteDoc(docRef);
-                    if(metaData){
-                        deleteObject(fileStorage);
-                        console.log('deleted successfully')
-                    }else{console.log('file doesnt exist')}
-                    
-                });
+                }
+                
             
-    }
+
     return(
         <div className="product">
             <div className="productImage">

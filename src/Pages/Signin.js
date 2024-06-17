@@ -33,10 +33,11 @@ export const Signin = ()=>{
             <form>
             <input type="email" placeholder="email" value={email} onChange={e=>setEmail(e.target.value)} />
                 <input placeholder="create password" value={password} onChange={e=>setPassword(e.target.value)} />
-                <button onClick={handleSignIn} className="btn btn-outline-success" disabled={disable}>submit</button>
+                <button onClick={handleSignIn} className="full-btn" disabled={disable}>submit</button>
                 {errorMessage && <p>{errorMessage}</p>}
+                <p><Link className="" to={'/signup'}> or signup?</Link></p>
             </form>
-            <p><Link to={'/signup'}> or signup?</Link></p>
+            
         </div>
     )
 }
