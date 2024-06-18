@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/commerce/static/css/main.e856bdb2.css",
-    "main.js": "/commerce/static/js/main.fb2def25.js",
+    "main.js": "/commerce/static/js/main.d95cde67.js",
     "static/js/453.ec0d5887.chunk.js": "/commerce/static/js/453.ec0d5887.chunk.js",
     "static/media/nike-lebron.jpg": "/commerce/static/media/nike-lebron.2219742530203bd7ad05.jpg",
     "static/media/WhatsApp Image 2024-06-17 at 01.07.53.jpeg": "/commerce/static/media/WhatsApp Image 2024-06-17 at 01.07.53.068af5f9f53846849bd2.jpeg",
     "static/media/Gojo-Jujutsu-Kaisen-But-Why-Tho-2.jpg": "/commerce/static/media/Gojo-Jujutsu-Kaisen-But-Why-Tho-2.a782fa9435f9e5ebe0da.jpg",
     "index.html": "/commerce/index.html",
     "main.e856bdb2.css.map": "/commerce/static/css/main.e856bdb2.css.map",
-    "main.fb2def25.js.map": "/commerce/static/js/main.fb2def25.js.map",
+    "main.d95cde67.js.map": "/commerce/static/js/main.d95cde67.js.map",
     "453.ec0d5887.chunk.js.map": "/commerce/static/js/453.ec0d5887.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e856bdb2.css",
-    "static/js/main.fb2def25.js"
+    "static/js/main.d95cde67.js"
   ]
 }
