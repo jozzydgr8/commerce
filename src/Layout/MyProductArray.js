@@ -45,7 +45,7 @@ export const MyProductArray = ({data})=>{
                     <button className="full-btn">Add to cart</button>
                 </div>
 
-                {user && <button className="outline-btn" onClick={()=>setWarn(true)}>delete</button> }
+                {user && user.uid === process.env.REACT_APP_acceptedID && <button className="outline-btn" onClick={()=>setWarn(true)}>delete</button>}
                 { user && warn && <div> <div>are you sure to delete</div> <button className="outline-btn" onClick={handleDelete}>yes</button> <button className="full-btn" onClick={()=>setWarn(false)}>no</button></div>}
             
              </div>
