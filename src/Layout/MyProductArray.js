@@ -36,7 +36,6 @@ export const MyProductArray = ({data})=>{
             <div className="productImage">
              <img src={data.productImage} alt="image"/>
             </div>
-             
              <div className="productDetail">
                 <div>{data.product}</div>
                 <div>price: {data.prize}</div>

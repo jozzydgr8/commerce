@@ -1,15 +1,12 @@
-import { Carousel } from "./Carousel"
-
 export const Header = ()=>{
     return (
         <main>
-            <h1 className="ubuntu">
-                the trade mock up store
-            </h1>
-            <em>everything slick and cool </em>
-            <div>
-                <Carousel/>
+            <div style={{textAlign:"center"}}>
+                <span className="ubuntu">the trade mock up store</span>
+                <div className="sacramento">everything slick and cool </div>
             </div>
+            
+
         </main>
     )
 }

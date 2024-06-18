@@ -16,6 +16,19 @@ body {
   --primary:#101314;
   --bright:#FFFFFA
 }
+.sacramento{
+  font-family: "Sacramento", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+.ubuntu{
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+  text-transform: capitalize;
+  font-size: xx-large;
+}
+
 form{
   display: flex;
   flex-direction: column;
@@ -35,11 +48,14 @@ form input, form select {
 }
 .outline-btn, .full-btn {
   padding: 1%;
-  margin: 2% 2% 0 0;
+  display: block;
+  text-align: center;
+  margin: 1% 2% 0 0;
   min-width: 100px;
   text-decoration: none;
-  
 
+} nav .outline-btn, nav .full-btn{
+  margin-top:7% ;
 }
 .full-btn{
   background: var(--primary);
@@ -73,6 +89,17 @@ img{
   .gridProduct{
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
+  .productImage{
+    max-height: 100px;
+  }
+  .productDetail{
+    min-height: 100px;
+  }
+}
+@media (max-width:400px) {
+  .gridProduct{
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
 }
 .product{
   background: var(--bright);
@@ -80,7 +107,7 @@ img{
   border-radius: 20px;
 }
 .productDetail{
-  padding: 20px;
+  padding: 1px 0px 10px 10px;
 }
 .productImage img{
   width:100%;
@@ -99,21 +126,20 @@ img{
 
 
 .header-carousel{
-  height: 50vh;
+  height: 60vh;
 }
-@media(max-width:600px){
+@media(max-width:800px){
   .header-carousel{
-    height: 30vh;
+    height: 20vh;
   }
 }
+
 .header-carousel-item1, .header-carousel-item2, .header-carousel-item3{
   background-repeat: no-repeat;
   background-position: center center ;
   background-size: cover;
-  filter: brightness(50%) contrast(100%);
   color: white;
   height: 100%;
-  z-index: 1;
 }
 .header-carousel-item1{
   background-image: url('./asset/nike-lebron.jpg');
@@ -123,4 +149,19 @@ img{
 }
 .header-carousel-item3{
   background-image: url('./asset/Gojo-Jujutsu-Kaisen-But-Why-Tho-2.jpg');
+}
+
+.backdrop{
+  backdrop-filter: brightness(65%) contrast(110%) blur(1px);
+  width: 100%;
+  height: 100%;
+  color:white;
+  margin: 0;
+}
+.backdrop .col-6{
+  padding: 5% 0% 0% 5%;
+  font-size: 2.0vw;
+}
+.better{
+  color: white;
 }
