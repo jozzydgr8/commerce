@@ -45,12 +45,23 @@ function App() {
   //router
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Root/>}>
+      <>
+        <Route path="/" element={<Root/>}>
         <Route index element={<Home />} />
         <Route path="signup" element={!user ? <Signup/>: <Navigate to={'/'} />} />
         <Route path='signin' element={!user ? <Signin />: <Navigate to ={'/'}/>} />
         <Route path="uploadproduct" element ={user ? <UploadProduct />: <Navigate to={'/signin'} />} />
       </Route>
+      <Route path="/commerce" element={<Root/>}>
+        <Route index element={<Home />} />
+        <Route path="signup" element={!user ? <Signup/>: <Navigate to={'/commerce'} />} />
+        <Route path='signin' element={!user ? <Signin />: <Navigate to ={'/commerce'}/>} />
+        <Route path="uploadproduct" element ={user ? <UploadProduct />: <Navigate to={'signin'} />} />
+      </Route>
+      </>
+
+      
+
     )
   )
   return (

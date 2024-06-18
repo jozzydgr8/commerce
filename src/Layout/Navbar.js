@@ -36,7 +36,7 @@ export const Navbar = ()=>{
       <div className="offcanvas-body">
         <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li className="nav-item">
-            <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
+            <NavLink className="nav-link active" aria-current="page" to="/commerce">Home</NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="#">Link</NavLink>

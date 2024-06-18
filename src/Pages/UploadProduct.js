@@ -67,7 +67,7 @@ export const UploadProduct = ()=>{
           setPrize('');
           setProductOwner('');
           
-          window.location.href = '/';
+          window.location.href = '/commerce';
         } catch (error) {
           console.log(error);
           
