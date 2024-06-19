@@ -3,6 +3,7 @@ import { colRef, storage } from "../App"
 import { useState } from "react"
 import { deleteObject, getMetadata, ref } from "firebase/storage"
 import { AuthConsumer } from "../Context/ContextAuth/AuthConsumer"
+import { Link } from "react-router-dom"
 
 export const MyProductArray = ({data})=>{
 
@@ -32,7 +33,7 @@ export const MyProductArray = ({data})=>{
             
 
     return(
-        <div className="product">
+        <Link to={`/commerce/${data.id}`} className="product">
             <div className="productImage">
              <img src={data.productImage} alt="image"/>
             </div>
@@ -49,6 +50,6 @@ export const MyProductArray = ({data})=>{
             
              </div>
 
-        </div>
+        </Link>
     )
 }

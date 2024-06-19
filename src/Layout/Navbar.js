@@ -10,11 +10,7 @@ export const Navbar = ()=>{
     const handleLogOut = ()=>{
         signOut(auth)
         .then(()=>{
-            localStorage.removeItem('user');
-            localStorage.removeItem('displayName');
-            deleteData({type:'getData', payload:null});
-            dispatch({type:'signUser', payload:null});
-            
+            dispatch({type:'signUser', payload:null}); 
         })
     }
 

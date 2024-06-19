@@ -6,15 +6,14 @@ import { Navigate, Route, RouterProvider, createBrowserRouter, createRoutesFromE
 import {AuthConsumer} from './Context/ContextAuth/AuthConsumer';
 
 
-
 //LAYout
 import { Root } from "./Layout/Root";
 //pAGes
 import { Home } from "./Pages/Home";
 import { Signup } from "./Pages/Signup";
-import { useEffect } from "react";
 import { Signin } from "./Pages/Signin";
 import {UploadProduct} from "./Pages/UploadProduct"
+import { ProductTemp } from "./Layout/ProducTemp";
 
 
 // init firebase
@@ -57,6 +56,7 @@ function App() {
         <Route path="signup" element={!user ? <Signup/>: <Navigate to={'/commerce'} />} />
         <Route path='signin' element={!user ? <Signin />: <Navigate to ={'/commerce'}/>} />
         <Route path="uploadproduct" element ={user ? <UploadProduct />: <Navigate to={'signin'} />} />
+        <Route path=":id" element={<ProductTemp />} />
       </Route>
       </>
 
