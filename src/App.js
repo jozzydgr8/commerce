@@ -1,9 +1,11 @@
 import { initializeApp } from "firebase/app";
-import {getFirestore, collection} from "firebase/firestore"
+import { useEffect } from "react";
+import {getFirestore, collection, onSnapshot} from "firebase/firestore"
 import {getAuth} from 'firebase/auth'
 import {getStorage} from 'firebase/storage'
 import { Navigate, Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import {AuthConsumer} from './Context/ContextAuth/AuthConsumer';
+import { UseContextData } from "./Context/ContextAuth/ContextProvider/UseContextData";
 
 
 //LAYout
@@ -14,6 +16,7 @@ import { Signup } from "./Pages/Signup";
 import { Signin } from "./Pages/Signin";
 import {UploadProduct} from "./Pages/UploadProduct"
 import { ProductTemp } from "./Layout/ProducTemp";
+import { Cart } from "./Layout/Cart";
 
 
 // init firebase
@@ -37,7 +40,19 @@ export const storage = getStorage(app)
 
 function App() {
   const {user, loading} = AuthConsumer();
-  if(loading){
+  const {dispatch, loading:load} = UseContextData();
+  useEffect(()=>{
+    dispatch({type:'loading', payload:true})
+    const unSubscribe = onSnapshot(colRef, (snapshot)=>{
+        const data = []
+        const dataRef = snapshot.docs.forEach(doc=>{
+          data.push({...doc.data(), id:doc.id});
+          dispatch({type:'getData', payload:data});
+        });
+      });
+      return ()=> unSubscribe();
+    },[]);
+  if(loading || load){
     return <div>...loading</div>
   }
 
@@ -50,6 +65,7 @@ function App() {
         <Route path="signup" element={!user ? <Signup/>: <Navigate to={'/'} />} />
         <Route path='signin' element={!user ? <Signin />: <Navigate to ={'/'}/>} />
         <Route path="uploadproduct" element ={user ? <UploadProduct />: <Navigate to={'/signin'} />} />
+        <Route path=":id" element={<ProductTemp />} />
       </Route>
       <Route path="/commerce" element={<Root/>}>
         <Route index element={<Home />} />
@@ -57,6 +73,7 @@ function App() {
         <Route path='signin' element={!user ? <Signin />: <Navigate to ={'/commerce'}/>} />
         <Route path="uploadproduct" element ={user ? <UploadProduct />: <Navigate to={'signin'} />} />
         <Route path=":id" element={<ProductTemp />} />
+        <Route path={"cart"} element={<Cart/>} />
       </Route>
       </>
 

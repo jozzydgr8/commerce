@@ -1,80 +1,91 @@
 import { doc, deleteDoc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { db, colRef, storage  } from "../App";
 import { deleteObject, getMetadata, ref } from "firebase/storage"
 import { AuthConsumer } from "../Context/ContextAuth/AuthConsumer"
+import { UseContextData } from "../Context/ContextAuth/ContextProvider/UseContextData";
 
 export const ProductTemp = ()=>{
     const {id} = useParams();
     const [tempData, setTempData] = useState(null);
     const [warn, setWarn] = useState(false);
     const {user} = AuthConsumer();
+    const {data} = UseContextData();
+    const navigate = useNavigate();
     useEffect(()=>{
-        const fetchData = async ()=>{
-        const docRef = doc(db, 'vendor', id);
-        try{
-            const docSnap = await getDoc(docRef)
-            if(docSnap.exists()){
-                const data = {...docSnap.data(), id: docSnap.id}
-                console.log(data);
-                setTempData(data)
-            }
-        }catch(error){
-            console.error(error)
+            const template = data.filter(data => id.includes(data.id));
+            console.log(template)
+            setTempData(template)
+    
+
+    },[]);
+
+    console.log(tempData)
+
+//handlecart
+const addCart = (id)=>{
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    const cartArray = [id]
+    if(!cart){
+        localStorage.setItem('cart', JSON.stringify(cartArray))
+    }else{
+        const check = cart.filter(cart => id.includes(cart));
+        if(check.length === 0){
+            cart.push(id);
+            localStorage.setItem('cart',JSON.stringify(cart))
         }
+  
     }
-        fetchData()
-    },[id])
+}
+//handleDelete
+const handleDelete = async (imagePath, id) => {
+    const fileStorage = ref(storage, imagePath);
 
+    try {
+        // First, delete the image from storage
+        await deleteObject(fileStorage);
+    } catch (error) {
+        return console.error("Error deleting image:", error);
+    }
 
-
-    const handleDelete =  ()=>{
-        const fileStorage = ref(storage, tempData.imagePath);
-        if(fileStorage){
-            console.log('wey')
-            const metaData = getMetadata(fileStorage).then(()=>{
-                deleteObject(fileStorage);
-            }).catch(error=>{
-                if(error){
-                    const docRef = doc(colRef, tempData.id);
-                    deleteDoc(docRef);
-                }
-                console.log(error);
-                return
-            })
-        const docRef = doc(colRef, tempData.id);
-        deleteDoc(docRef);
-            }
-            const docRef = doc(colRef, tempData.id);
-            deleteDoc(docRef);
-        }
+    // Then, delete the document from Firestore
+    try {
+        const docRef = doc(colRef,id);
+        await deleteDoc(docRef);
+        
+    } catch (error) {
+        return console.error("Error deleting document:", error);
+    }
+    navigate('/commerce')
+};
     return(
         <>
             {
-                tempData && 
-            <main className="gridProduct">
-                    
-            <div className="product">
-            <div className="productImage">
-             <img src={tempData.productImage} alt="image"/>
-            </div>
-             <div className="productDetail">
-                <div>{tempData.product}</div>
-                <div>price: {tempData.prize}</div>
-                
-                <div>
-                    <button className="full-btn">Add to cart</button>
-                </div>
+                tempData && tempData.map(tempData =>(
+                        <main key={tempData.id} className="gridProduct">
+                                
+                                <div className="product">
+                                <div className="productImage">
+                                <img src={tempData.productImage} alt="image"/>
+                                </div>
+                                <div className="productDetail">
+                                    <div>{tempData.product}</div>
+                                    <div>price: {tempData.prize}</div>
+                                    
+                                    <div>
+                                        <button onClick={()=>addCart(id)} className="full-btn">Add to cart</button>
+                                    </div>
 
-                {user && user.uid === process.env.REACT_APP_acceptedID && <button className="outline-btn" onClick={()=>setWarn(true)}>delete</button>}
-                { user && warn && <div> <div>are you sure to delete</div> <button className="outline-btn" onClick={handleDelete}>yes</button> <button className="full-btn" onClick={()=>setWarn(false)}>no</button></div>}
-            
-             </div>
+                                    {user && user.uid === process.env.REACT_APP_acceptedID && <button className="outline-btn" onClick={()=>setWarn(true)}>delete</button>}
+                                    { user && warn && <div> <div>are you sure to delete</div> <button className="outline-btn" onClick={()=>handleDelete(tempData.imagePath, tempData.id)}>yes</button> <button className="full-btn" onClick={()=>setWarn(false)}>no</button></div>}
+                                
+                                </div>
 
-        </div>
-                    
-                </main>
+                                </div>
+                                
+                            </main>
+                ))
             }
         </>
     )

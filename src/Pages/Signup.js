@@ -22,7 +22,6 @@ export const Signup = ()=>{
             setDisable(false)
 
                 const user = userCredentials.user;
-                localStorage.setItem('user', JSON.stringify(user));
                 dispatch({type:'signUser', payload:user});
                 sendEmailVerification(user)
                 .then(()=>{

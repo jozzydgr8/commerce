@@ -27,6 +27,9 @@ export const Navbar = ()=>{
               <NavLink className="nav-link active" aria-current="page" to="/commerce">Home</NavLink>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link active" aria-current="page" to="/commerce/cart">carts</NavLink>
+            </li>
+            <li className="nav-item">
             {user ? <button className="outline-btn" onClick={handleLogOut}>logout</button> : <NavLink to='signin' className=" full-btn">sign in</NavLink> }
             </li>
           </ul>

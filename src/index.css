@@ -167,3 +167,28 @@ img{
 .better{
   color: white;
 }
+
+
+.cartDiv{
+  background: rgb(177, 177, 177) ;
+  margin: 20px 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+}
+.cartSubDiv{
+  width: 50%;
+}
+
+/* .cartImgDiv{
+  overflow: hidden;
+  width: 100%;
+  height: 50%;
+} */
+.cartDiv img{
+  width:80%;
+}
+.cartDetail{
+
+}

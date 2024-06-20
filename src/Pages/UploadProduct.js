@@ -60,7 +60,8 @@ export const UploadProduct = ()=>{
             category: category,
             productOwner: productOwner,
             prize: prize + '$',
-            imagePath: imagePath
+            imagePath: imagePath,
+            stock:stock
           });
           setProductName('');
           setCategory('');

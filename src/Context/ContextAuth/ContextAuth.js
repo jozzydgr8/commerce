@@ -31,7 +31,6 @@ export const ContextAuth=({children})=>{
        const unsubscribe = onAuthStateChanged(auth, user=>{
           if(user){
             const user = auth.currentUser;
-            const {displayName, uid} = user;
             dispatch({type:'signUser', payload:user});
             console.log('signed in')
           }else{
