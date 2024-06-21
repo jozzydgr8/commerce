@@ -12,6 +12,7 @@ export const ProductTemp = ()=>{
     const [warn, setWarn] = useState(false);
     const {user} = AuthConsumer();
     const {data} = UseContextData();
+    const [cartAlert, setCartAlert] = useState('')
     const navigate = useNavigate();
     useEffect(()=>{
             const template = data.filter(data => id.includes(data.id));
@@ -33,6 +34,8 @@ const addCart = (id)=>{
         }
   
     }
+
+    alert('added to carts')
 }
 //handleDelete
 const handleDelete = async (imagePath, id) => {

@@ -1,5 +1,5 @@
 import {NavLink} from "react-router-dom";
-import { auth } from "../App";
+import { auth, setLocalStorageItem } from "../App";
 import { signOut } from "firebase/auth";
 import { AuthConsumer } from "../Context/ContextAuth/AuthConsumer"; 
 import { useEffect, useState } from "react";
@@ -32,6 +32,8 @@ export const Navbar = ()=>{
     const handleLogOut = ()=>{
         signOut(auth)
         .then(()=>{
+            const emptyCart = [];
+            setLocalStorageItem('cart',JSON.stringify(emptyCart))
             dispatch({type:'signUser', payload:null}); 
         })
     }
@@ -42,7 +44,7 @@ export const Navbar = ()=>{
         <NavLink className="navbar-brand ubuntu" to="/commerce">trade</NavLink>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
-          { count > 0 &&<span className='togglerbadge'>{count}</span>}
+          { count > 0 &&<span className='togglerbadge'>{' '}</span>}
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">

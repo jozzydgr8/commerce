@@ -77,34 +77,41 @@ export const Cart = () => {
     
     return (
         <>
-            <main>
-                <div>cart summary</div>
+            <main className="summary">
+                <span>cart summary</span>
                 
-                    <div>
-                        subtotal: {reduce}
+                    <div className="subtotal">
+                        subtotal: $ {reduce}
+                        <div>Delivery fees not included yet</div>
                     </div>
    
                 {cart.map(cart => (
                     <div key={cart.id} className="cartDiv">
-                        <div className="cartSubDiv">
-                            <div className="cartImgDiv">
+                        <div className="cartSubDiv row">
+                            <div className="cartImgDiv col-md-6">
                                 <img src={`${cart.productImage}`} alt={cart.product} />
                             </div>
-                            <div className="cartDetail">
+                            <div className="cartDetail col-md-6">
                                 <div>{cart.product}</div>
                                 <div>{amounts[cart.id]}</div>
                                 <div>
-                                    <button className="full-btn" onClick={() => increaseAmount(cart.id)}>increase</button>
+                                    <button className="full-btn" onClick={() => increaseAmount(cart.id)} style={{fontSize:'18px'}}>+</button>
                                 </div>
                                 <div>
-                                    {amounts[cart.id] == 1 ? <button onClick={()=>removeItem(cart.id)} className="outline-btn">remove item</button>:
-                                    <button className="outline-btn" onClick={() => decreaseAmount(cart.id)}>decrease</button>}
+                                <button className="outline-btn" onClick={() => decreaseAmount(cart.id)} style={{fontSize:'18px'}}>-</button>
+                                </div>
+                                <div>
+                                    <button onClick={()=>removeItem(cart.id)} className="outline-btn">remove item</button>
 
                                 </div>
                             </div>
                         </div>
                     </div>
                 ))}
+
+                
+                    <button style={{width:'100%'}} className="full-btn">checkout {`$ ${reduce}`}</button>
+                
             </main>
         </>
     );
