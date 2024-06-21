@@ -1,8 +1,8 @@
-import { doc, deleteDoc, getDoc } from "firebase/firestore";
+import { doc, deleteDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
-import { db, colRef, storage  } from "../App";
-import { deleteObject, getMetadata, ref } from "firebase/storage"
+import {  colRef, storage, setLocalStorageItem  } from "../App";
+import { deleteObject, ref } from "firebase/storage"
 import { AuthConsumer } from "../Context/ContextAuth/AuthConsumer"
 import { UseContextData } from "../Context/ContextAuth/ContextProvider/UseContextData";
 
@@ -15,25 +15,21 @@ export const ProductTemp = ()=>{
     const navigate = useNavigate();
     useEffect(()=>{
             const template = data.filter(data => id.includes(data.id));
-            console.log(template)
             setTempData(template)
     
-
-    },[]);
-
-    console.log(tempData)
+    },[data]);
 
 //handlecart
 const addCart = (id)=>{
     const cart = JSON.parse(localStorage.getItem('cart'));
     const cartArray = [id]
     if(!cart){
-        localStorage.setItem('cart', JSON.stringify(cartArray))
+            setLocalStorageItem('cart', JSON.stringify(cartArray));
     }else{
         const check = cart.filter(cart => id.includes(cart));
         if(check.length === 0){
             cart.push(id);
-            localStorage.setItem('cart',JSON.stringify(cart))
+            setLocalStorageItem('cart',JSON.stringify(cart))
         }
   
     }

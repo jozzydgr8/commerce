@@ -31,11 +31,18 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-//auth
+//authm
 export const auth = getAuth();
 export const db = getFirestore();
 export const colRef = collection(db, 'vendor');
-export const storage = getStorage(app)
+export const storage = getStorage(app);
+
+const storageEvent = new Event('storageUpdate'); 
+export const setLocalStorageItem = ((key, value)=>{
+  localStorage.setItem(key, value);
+
+  window.dispatchEvent(storageEvent);
+})
 
 
 function App() {
@@ -52,6 +59,7 @@ function App() {
       });
       return ()=> unSubscribe();
     },[]);
+
   if(loading || load){
     return <div>...loading</div>
   }
